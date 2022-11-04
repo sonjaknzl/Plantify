@@ -1,32 +1,24 @@
 package com.example.customapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ToDoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ToDoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    lateinit var list: ArrayList<Plant>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -37,23 +29,41 @@ class ToDoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_to_do, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val currentDate = sdf.format(Date())
+
+        list.sortBy { it.waterDate }
+
+        val listToday = mutableListOf<Plant>()
+        val listLater = mutableListOf<Plant>()
+        for (item in list){
+            if(item.waterDate <= currentDate){
+                listToday.add(item)
+            } else{
+                listLater.add(item)
+            }
+        }
+
+        //RECYCLERVIEW TODAY
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler)
+        val adapter = Adapter(listToday) {}
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        //RECYCLERVIEW LATER
+        val recyclerViewLater = view.findViewById<RecyclerView>(R.id.recyclerLater)
+        val adapterLater = Adapter(listLater) {}
+        recyclerViewLater.adapter = adapterLater
+        recyclerViewLater.layoutManager = LinearLayoutManager(context)
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ToDoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(arrayList: ArrayList<Plant>) =
             ToDoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+                list = arrayList
             }
     }
 }

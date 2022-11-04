@@ -2,6 +2,7 @@ package com.example.customapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 
 
-open class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
     var list = mutableListOf<Plant>()
@@ -40,10 +41,10 @@ open class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
 
             it.isChecked = true
-
+            Log.i("INFO", list.toString())
             when (it.itemId) {
                 R.id.firstDrawerItem -> replaceFragment(HomeFragment(),it.title.toString())
-                R.id.secondDrawerItem -> replaceFragment(ToDoFragment(),it.title.toString())
+                R.id.secondDrawerItem -> replaceFragment(ToDoFragment.newInstance(ArrayList(list)),it.title.toString())
                 R.id.thirdDrawerItem -> replaceFragment(AboutFragment(),it.title.toString())
             }
             true
@@ -66,6 +67,10 @@ open class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
         drawerLayout.closeDrawers()
         setTitle(title)
+    }
+
+    override fun onDataPass(plantList: MutableList<Plant>) {
+        list = plantList
     }
 
 }

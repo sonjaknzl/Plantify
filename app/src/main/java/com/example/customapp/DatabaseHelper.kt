@@ -34,6 +34,8 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(PURCHASEDATE_COL, purchaseDate)
         values.put(WATERINGDATE_COL, wateringDate)
 
+        Log.i("INFO", name.toString()+species.toString()+purchaseDate+wateringDate)
+
         val db = this.writableDatabase
         val result = db.insert(TABLE_NAME, null, values).toInt()
         db.close()
@@ -42,8 +44,8 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
     fun deletePlant(position: Int){
         val db = this.writableDatabase
-        Log.i("INFO", position.toString())
-        Log.i("INFO", (position+1).toString())
+        //Log.i("INFO", position.toString())
+        //Log.i("INFO", (position+1).toString())
         db.execSQL("DELETE FROM " +TABLE_NAME+ " WHERE "+ ID_COL+"="+(position+1)+";")
 
 

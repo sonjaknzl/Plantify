@@ -50,7 +50,6 @@ class Adapter(
 
             fun String.removeWhitespaces() = replace(" ", "")
             val uri = "drawable/"+dropdown[item.species].lowercase().removeWhitespaces()
-            Log.i("INFO", uri)
             val res: Int = v.context.resources.getIdentifier(uri, null, v.context.packageName)
             icon.setImageResource(res)
 
