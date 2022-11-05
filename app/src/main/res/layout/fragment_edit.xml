@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddFragment">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,12 +21,13 @@
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/labelName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="Name"
+                    android:text="@string/defaultName"
                     android:textColor="@color/grey"
                     android:textSize="16sp" />
 
@@ -34,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="65dp"
-                    android:text="Species"
+                    android:text="@string/species"
                     android:textColor="@color/grey"
                     android:textSize="16sp" />
 
@@ -43,15 +45,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
-                    android:text="Purchased \non"
+                    android:text="@string/purchasedon"
                     android:textColor="@color/grey"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/labelWaterDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
-                    android:text="Last \nwatered on"
+                    android:text="@string/wateredon"
                     android:textColor="@color/grey"
                     android:textSize="16sp" />
 
@@ -61,7 +64,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp">
+                android:layout_marginStart="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -76,7 +79,6 @@
                         android:id="@+id/nameEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
                         android:hint="@string/defaultName"
                         android:inputType="text"
                         app:errorEnabled="true"
@@ -100,8 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="none"
-                        />
+                        android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,11 +122,9 @@
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
                         android:background="@color/white"
-                        android:ems="10"
                         android:hint="@string/defaultDate"
                         android:inputType="date"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false" />
+                        android:focusable="false" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -144,11 +143,9 @@
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
                         android:background="@color/white"
-                        android:ems="10"
                         android:hint="@string/defaultDate"
                         android:inputType="date"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false" />
+                        android:focusable="false" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>

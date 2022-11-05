@@ -1,31 +1,37 @@
 package com.example.customapp
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import java.io.BufferedReader
-import java.io.FileReader
 
 
 open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
-    lateinit var toggle: ActionBarDrawerToggle
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var username: String
-    var list = mutableListOf<Plant>()
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var drawerLayout: DrawerLayout
+    private var username: String = ""
+    private var list = mutableListOf<Plant>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val appSharedPrefs =
             androidx.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
-        appSharedPrefs.getString("username","")?.let { Log.i("INFO", it) }
+        appSharedPrefs.getString("username", "")?.let { Log.i("INFO", it) }
 
-        
+        // SET MENU HEADER
+        val navView= findViewById<View>(R.id.nav_view) as NavigationView
+        val headerView = navView.getHeaderView(0)
+        val navUsername = headerView.findViewById<View>(R.id.username) as TextView
+        navUsername.text = appSharedPrefs.getString("username", "")
+
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.frameLayout, HomeFragment())
@@ -35,8 +41,7 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         //this.deleteDatabase("PlantLibrary.db")
 
         // SET DRAWERLAYOUT
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
+        drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -46,16 +51,16 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         navView.setNavigationItemSelectedListener {
 
             it.isChecked = true
-            Log.i("INFO", list.toString())
             when (it.itemId) {
-                R.id.firstDrawerItem -> replaceFragment(HomeFragment(),it.title.toString())
-                R.id.secondDrawerItem -> replaceFragment(ToDoFragment.newInstance(ArrayList(list)),it.title.toString())
-                R.id.thirdDrawerItem -> replaceFragment(AboutFragment(),it.title.toString())
+                R.id.firstDrawerItem -> replaceFragment(HomeFragment(), it.title.toString())
+                R.id.secondDrawerItem -> replaceFragment(
+                    ToDoFragment.newInstance(ArrayList(list)),
+                    it.title.toString()
+                )
+                R.id.thirdDrawerItem -> replaceFragment(AboutFragment(), it.title.toString())
             }
             true
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -65,7 +70,7 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         return super.onOptionsItemSelected(item)
     }
 
-    fun replaceFragment(fragment: Fragment, title: String){
+    fun replaceFragment(fragment: Fragment, title: String) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
@@ -86,7 +91,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         prefsEditor.putString("username", username)
         prefsEditor.apply()
     }
-
 
 
 }

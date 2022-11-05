@@ -1,79 +1,76 @@
 package com.example.customapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
-class Adapter(
-    private val data: MutableList<Plant>,
-    private val listener: (Plant) -> Unit
-) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class AdapterToDo(
+    private val data: MutableList<Plant>
+) : RecyclerView.Adapter<AdapterToDo.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterToDo.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater
-            .inflate(R.layout.layout_row, parent, false) as View
+            .inflate(R.layout.layout_row_todo, parent, false) as View
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdapterToDo.ViewHolder, position: Int) {
         val item = data[position]
-        holder.const.visibility = if (item.visibility) View.VISIBLE else View.GONE
-
         holder.bind(item)
-    }
-
-    fun removeAt(position: Int) {
-        data.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     inner class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         private val name: TextView = v.findViewById(R.id.name)
         private val species: TextView = v.findViewById(R.id.species)
         private val icon: ImageView = v.findViewById(R.id.icon)
-        val const: LinearLayout = v.findViewById(R.id.expandedItem)
-        private val waterDate: TextView = v.findViewById(R.id.waterDate)
         private val nextWaterDate: TextView = v.findViewById(R.id.nextWaterDate)
-        private val infoText: TextView = v.findViewById(R.id.infoText)
 
 
         fun bind(item: Plant) {
             name.text = item.name
             val dropdown = v.resources.getStringArray(R.array.options)
             species.text = dropdown[item.species]
-            waterDate.text = item.waterDate
             nextWaterDate.text = item.nextWaterDate
-            infoText.text = item.infoText
 
-            //EDIT BUTTON
-            val editBtn = v.findViewById<ImageView>(R.id.editBtn)
-            editBtn?.setOnClickListener {
+            //WATER BUTTON
+            val waterBtn = v.findViewById<Button>(R.id.waterBtn)
+            waterBtn?.setOnClickListener {
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                val formatted = current.format(formatter)
+
+
+                item.waterDate = formatted
+                val db = DatabaseHelper(v.context, null)
+                db.updatePlantByName(item.name, item.species, item.purchaseDate, item.waterDate)
+
                 val activity = it.context as MainActivity
-                (activity as MainActivity?)?.replaceFragment(
-                    EditFragment.newInstance(
-                        item,
-                        adapterPosition
-                    ), "Edit Plant"
-                )
+                (activity as MainActivity?)?.replaceFragment(HomeFragment(), "Home")
+
+                Log.i("INFO", item.waterDate)
+                Toast.makeText(v.context, "Plant was watered!", Toast.LENGTH_LONG).show()
+
+                //position: Int, name: String, species: Int, purchaseDate: String, wateringDate: String
             }
+
 
             fun String.removeWhitespaces() = replace(" ", "")
             val uri = "drawable/" + dropdown[item.species].lowercase().removeWhitespaces()
             val res: Int = v.context.resources.getIdentifier(uri, null, v.context.packageName)
             icon.setImageResource(res)
 
-            v.setOnClickListener {
-                listener(item)
-                notifyItemChanged(adapterPosition)
-            }
         }
 
     }

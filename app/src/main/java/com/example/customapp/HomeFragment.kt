@@ -2,14 +2,11 @@ package com.example.customapp
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -28,22 +24,18 @@ class HomeFragment : Fragment() {
         fun onDataPass(data: MutableList<Plant>)
     }
 
-    lateinit var dataPasser: OnDataPass
+    private lateinit var dataPasser: OnDataPass
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         dataPasser = context as OnDataPass
     }
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     lateinit var adapter: Adapter
-    var list = mutableListOf<Plant>()
+    private var list = mutableListOf<Plant>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    fun showInfo(item: Plant) {
+    private fun showInfo(item: Plant) {
         item.visibility = !item.visibility
     }
 
@@ -68,10 +60,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
+        // SET GREETING
+        val preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(view.context)
+        val greeting = activity?.findViewById<TextView>(R.id.greeting)
+        greeting?.text = "Hello "+preferences.getString("username", "")+"!"
+
         //RECYCLERVIEW
         dataInArray()
         passData(list)
-        recyclerView = view.findViewById<RecyclerView>(R.id.recycler)
+        recyclerView = view.findViewById(R.id.recycler)
         adapter = Adapter(list) { showInfo(it) }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -98,7 +95,7 @@ class HomeFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    fun passData(data: MutableList<Plant>){
+    private fun passData(data: MutableList<Plant>){
         dataPasser.onDataPass(data)
     }
 
@@ -146,8 +143,8 @@ class HomeFragment : Fragment() {
     private fun getNextWaterDateAndInfo(db: DatabaseHelper, plSpecies: Int, plWateringDate: String): Array<String?> {
         // get nextWaterDate
         val deltaWater = db.getNextWateringDate(resources.getStringArray(R.array.options)[plSpecies])
-        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        var date: LocalDate = LocalDate.parse(plWateringDate, formatter)
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val date: LocalDate = LocalDate.parse(plWateringDate, formatter)
         val nextWaterDate = deltaWater?.let { date.plusDays(it.toLong()) }?.format(formatter).toString()
 
         // get infoText
@@ -158,14 +155,4 @@ class HomeFragment : Fragment() {
         return arrayOf(nextWaterDate, "")
     }
 
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelableArrayList("dataArray",ArrayList(list))
-                }
-            }
-    }
 }

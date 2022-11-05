@@ -6,7 +6,7 @@
     android:padding="10dp"
     android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -15,7 +15,8 @@
             android:id="@+id/icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/plantdesc" />
 
 
         <LinearLayout
@@ -38,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp" />
-            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -128,6 +129,7 @@
                 app:tint="@color/grey" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/infoText"
             android:layout_width="match_parent"

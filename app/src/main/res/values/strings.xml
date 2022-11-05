@@ -9,7 +9,7 @@
     <string name="greeting">Hello Nicole!</string>
     <string name="intro">Here are your plants:</string>
     <string name="add">Add</string>
-    <string name="save">Save</string>
+    <string name="save">SAVE</string>
     <string-array name="options">
         <item>Monstera</item>
         <item>Philodendron</item>
@@ -24,4 +24,12 @@
     <string name="nextWater">See which plants need to be watered next.</string>
     <string name="today">Today</string>
     <string name="later">Later</string>
+    <string name="username">Username</string>
+    <string name="resetdata">Reset data</string>
+    <string name="deleteplants">DELETE PLANTS</string>
+    <string name="species">Species</string>
+    <string name="purchasedon">Purchased \non</string>
+    <string name="wateredon">Last \nwatered on</string>
+    <string name="plantdesc">Plant Icon</string>
+    <string name="addbtn">Add Button</string>
 </resources>

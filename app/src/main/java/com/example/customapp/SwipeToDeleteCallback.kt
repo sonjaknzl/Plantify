@@ -7,10 +7,9 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 
 
-abstract class SwipeToDeleteCallback (var mContext: Context) :
+abstract class SwipeToDeleteCallback(mContext: Context) :
     ItemTouchHelper.Callback() {
     private val mClearPaint: Paint
     private val mBackground: ColorDrawable

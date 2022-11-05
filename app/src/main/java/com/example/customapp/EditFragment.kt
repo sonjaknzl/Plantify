@@ -2,25 +2,20 @@ package com.example.customapp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
 class EditFragment : Fragment() {
-    var formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+    private var formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
     lateinit var plant: Plant
     var position: Int = -1
-    var chosenDropdown: Int = -1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var chosenDropdown: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,19 +40,19 @@ class EditFragment : Fragment() {
         chosenDropdown = plant.species
 
         //SET DROPDOWN
-        val arrayAdapter = ArrayAdapter<String>(view.context, R.layout.dropdown_item,dropdown)
+        val arrayAdapter = ArrayAdapter(view.context, R.layout.dropdown_item, dropdown)
         dropdownAuto.setAdapter(arrayAdapter)
-        dropdownAuto.setOnItemClickListener { parent, view, position, id ->
+        dropdownAuto.setOnItemClickListener { _, _, position, _ ->
             chosenDropdown = position
         }
 
         //DATEPICKER FOR DATE INPUT FIELDS
         val purchaseDateLayout = view.findViewById<TextInputLayout>(R.id.purchaseDateLayout)
         val waterDateLayout = view.findViewById<TextInputLayout>(R.id.waterDateLayout)
-        plantPurchase.setOnClickListener{
+        plantPurchase.setOnClickListener {
             setDate(plantPurchase)
         }
-        plantWater.setOnClickListener{
+        plantWater.setOnClickListener {
             setDate(plantWater)
         }
 
@@ -87,7 +82,8 @@ class EditFragment : Fragment() {
                     plantWater.text.toString()
                 )
                 if (result == -1) {
-                    Toast.makeText(view.context, "Failed to update plant!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(view.context, "Failed to update plant!", Toast.LENGTH_LONG)
+                        .show()
                 } else {
                     Toast.makeText(view.context, "Plant was updated!", Toast.LENGTH_LONG).show()
                     (activity as MainActivity?)?.replaceFragment(HomeFragment(), "Home")
@@ -99,7 +95,7 @@ class EditFragment : Fragment() {
     private fun setDate(edit: EditText) {
         val c = Calendar.getInstance()
         val dpd = DatePickerDialog(
-            requireView().context, DatePickerDialog.OnDateSetListener{ view, year, month, day ->
+            requireView().context, { _, year, month, day ->
                 val selectDate = Calendar.getInstance()
                 selectDate.set(Calendar.YEAR, year)
                 selectDate.set(Calendar.MONTH, month)
