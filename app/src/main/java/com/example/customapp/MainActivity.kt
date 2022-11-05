@@ -15,12 +15,16 @@ import java.io.FileReader
 open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    lateinit var username: String
     var list = mutableListOf<Plant>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //
+        val appSharedPrefs =
+            androidx.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+        appSharedPrefs.getString("username","")?.let { Log.i("INFO", it) }
+
         
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -73,6 +77,16 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
     override fun onDataPass(plantList: MutableList<Plant>) {
         list = plantList
     }
+
+    override fun onPause() {
+        super.onPause()
+        val appSharedPrefs =
+            androidx.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+        val prefsEditor = appSharedPrefs.edit()
+        prefsEditor.putString("username", username)
+        prefsEditor.apply()
+    }
+
 
 
 }

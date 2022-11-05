@@ -40,7 +40,7 @@ class ToDoFragment : Fragment() {
         val listToday = mutableListOf<Plant>()
         val listLater = mutableListOf<Plant>()
         for (item in list){
-            if(item.waterDate <= currentDate){
+            if(item.nextWaterDate <= currentDate){
                 listToday.add(item)
             } else{
                 listLater.add(item)

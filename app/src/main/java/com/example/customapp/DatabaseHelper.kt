@@ -37,7 +37,6 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         reader.readLine()
         reader.forEachLine {
             val temp = it.split(";")
-            Log.i("INFO", temp[0])
             val sb = StringBuilder(str1)
             for (i in 0..2){
                 sb.append("'" + temp[i] + "', ")
@@ -63,17 +62,28 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(PURCHASEDATE_COL, purchaseDate)
         values.put(WATERINGDATE_COL, wateringDate)
 
-
         val db = this.writableDatabase
         val result = db.insert(TABLE_NAME, null, values).toInt()
         db.close()
         return result
     }
 
+    fun updatePlant(position: Int, name: String, species: Int, purchaseDate: String, wateringDate: String): Int {
+        val values = ContentValues()
+
+        values.put(NAME_COl, name)
+        values.put(SPECIES_COL, species)
+        values.put(PURCHASEDATE_COL, purchaseDate)
+        values.put(WATERINGDATE_COL, wateringDate)
+
+        val whereclause = "$ID_COL=?"
+        val whereargs = arrayOf((position+1).toString())
+        return this.writableDatabase.update(TABLE_NAME, values, whereclause, whereargs)
+
+    }
+
     fun deletePlant(position: Int){
         val db = this.writableDatabase
-        //Log.i("INFO", position.toString())
-        //Log.i("INFO", (position+1).toString())
         db.execSQL("DELETE FROM " +TABLE_NAME+ " WHERE "+ ID_COL+"="+(position+1)+";")
 
 
@@ -91,7 +101,6 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.execSQL("PRAGMA foreign_keys=on;")
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_OLD)
 
-        //db.execSQL("ALTER TABLE "+ TABLE_NAME+" ADD "+ ID_COL+" INTEGER PRIMARY KEY AUTOINCREMENT;")
 
         db.execSQL("PRAGMA foreign_keys=off;")
         db.execSQL("BEGIN TRANSACTION;")

@@ -1,7 +1,5 @@
 package com.example.customapp
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +7,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 
 
 class Adapter(
@@ -29,6 +26,7 @@ class Adapter(
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
         val item = data[position]
         holder.const.visibility = if (item.visibility) View.VISIBLE else View.GONE
+
         holder.bind(item)
     }
 
@@ -46,6 +44,7 @@ class Adapter(
         val nextWaterDate: TextView = v.findViewById(R.id.nextWaterDate)
         val infoText: TextView = v.findViewById(R.id.infoText)
 
+
         fun bind(item: Plant) {
             name.text = item.name
             val dropdown = v.resources.getStringArray(R.array.options)
@@ -53,6 +52,13 @@ class Adapter(
             waterDate.text = item.waterDate
             nextWaterDate.text = item.nextWaterDate
             infoText.text = item.infoText
+
+            //EDIT BUTTON
+            val editBtn = v?.findViewById<ImageView>(R.id.editBtn)
+            editBtn?.setOnClickListener {
+                val activity=it.context as MainActivity
+                (activity as MainActivity?)?.replaceFragment(EditFragment.newInstance(item, adapterPosition), "Edit Plant")
+            }
 
 
             fun String.removeWhitespaces() = replace(" ", "")
