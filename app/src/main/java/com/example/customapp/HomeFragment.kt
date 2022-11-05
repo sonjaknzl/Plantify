@@ -2,26 +2,21 @@ package com.example.customapp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SimpleAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -116,7 +111,11 @@ class HomeFragment : Fragment() {
             val plSpecies: Int = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.SPECIES_COL))
             val plPurchaseDate: String = cursor.getString(cursor.getColumnIndex(DatabaseHelper.PURCHASEDATE_COL))
             val plWateringDate: String = cursor.getString(cursor.getColumnIndex(DatabaseHelper.WATERINGDATE_COL))
-            list.add(Plant(plName, plSpecies, plPurchaseDate, plWateringDate))
+
+            val array = getNextWaterDateAndInfo(db, plSpecies, plWateringDate)
+            list.add(Plant(plName, plSpecies, plPurchaseDate, plWateringDate,
+                array[0].toString(), array[1].toString()
+            ))
 
             // moving cursor to next position
             while (cursor.moveToNext()) {
@@ -128,10 +127,30 @@ class HomeFragment : Fragment() {
                     cursor.getString(cursor.getColumnIndex(DatabaseHelper.PURCHASEDATE_COL))
                 val plWateringDate: String =
                     cursor.getString(cursor.getColumnIndex(DatabaseHelper.WATERINGDATE_COL))
-                list.add(Plant(plName, plSpecies, plPurchaseDate, plWateringDate))
+                //Log.i("INFO", db.getNextWateringDate(plSpecies))
+
+                val array = getNextWaterDateAndInfo(db, plSpecies, plWateringDate)
+                list.add(Plant(plName, plSpecies, plPurchaseDate, plWateringDate,
+                    array[0].toString(), array[1].toString()
+                ))
             }
         }
         db?.close()
+    }
+
+    private fun getNextWaterDateAndInfo(db: DatabaseHelper, plSpecies: Int, plWateringDate: String): Array<String?> {
+        // get nextWaterDate
+        val deltaWater = db.getNextWateringDate(resources.getStringArray(R.array.options)[plSpecies])
+        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        var date: LocalDate = LocalDate.parse(plWateringDate, formatter)
+        val nextWaterDate = deltaWater?.let { date.plusDays(it.toLong()) }?.format(formatter).toString()
+
+        // get infoText
+        val infoText = db.getInfo(resources.getStringArray(R.array.options)[plSpecies])
+        if(infoText != null){
+            return arrayOf(nextWaterDate, infoText)
+        }
+        return arrayOf(nextWaterDate, "")
     }
 
 

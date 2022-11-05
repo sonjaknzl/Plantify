@@ -1,6 +1,5 @@
 package com.example.customapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -9,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import java.io.BufferedReader
+import java.io.FileReader
 
 
 open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
@@ -72,5 +73,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
     override fun onDataPass(plantList: MutableList<Plant>) {
         list = plantList
     }
+
 
 }

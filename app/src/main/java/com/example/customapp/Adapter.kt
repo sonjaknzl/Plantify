@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 
 
 class Adapter(
@@ -27,7 +28,6 @@ class Adapter(
 
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
         val item = data[position]
-
         holder.const.visibility = if (item.visibility) View.VISIBLE else View.GONE
         holder.bind(item)
     }
@@ -42,11 +42,18 @@ class Adapter(
         private val species: TextView = v.findViewById(R.id.species)
         private val icon: ImageView = v.findViewById(R.id.icon)
         val const: LinearLayout = v.findViewById(R.id.expandedItem)
+        val waterDate: TextView = v.findViewById(R.id.waterDate)
+        val nextWaterDate: TextView = v.findViewById(R.id.nextWaterDate)
+        val infoText: TextView = v.findViewById(R.id.infoText)
 
         fun bind(item: Plant) {
             name.text = item.name
             val dropdown = v.resources.getStringArray(R.array.options)
             species.text = dropdown[item.species]
+            waterDate.text = item.waterDate
+            nextWaterDate.text = item.nextWaterDate
+            infoText.text = item.infoText
+
 
             fun String.removeWhitespaces() = replace(" ", "")
             val uri = "drawable/"+dropdown[item.species].lowercase().removeWhitespaces()

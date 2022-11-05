@@ -9,5 +9,7 @@ data class Plant (
     val species: Int,
     val purchaseDate: String,
     val waterDate: String,
+    var nextWaterDate: String,
+    var infoText: String,
     var visibility: Boolean = false
 ): Parcelable

@@ -6,11 +6,16 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import androidx.core.database.getIntOrNull
+import androidx.core.database.getStringOrNull
+
 
 class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
+    val context = context.applicationContext
 
     override fun onCreate(db: SQLiteDatabase) {
+        //TABLE PLANTS
         val query = ("CREATE TABLE " + TABLE_NAME + " ("+
                 NAME_COl + " TEXT, " +
                 SPECIES_COL + " INTEGER, " +
@@ -18,6 +23,30 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 WATERINGDATE_COL + " TEXT, "
                 +ID_COL + " INTEGER PRIMARY KEY" + ")")
         db.execSQL(query)
+
+        //TABLE SPECIES
+        val query2 = ("CREATE TABLE " + TABLE_SPECIES + " ('_species' TEXT, '_infoText' TEXT, '_deltaWater' INTEGER);")
+        db.execSQL(query2)
+
+        val tableName = TABLE_SPECIES
+        val columns = "_species, _infoText, _deltaWater"
+        val str1 = "INSERT INTO $tableName ($columns) values("
+        val str2 = ");"
+
+        val reader = context.resources.openRawResource(R.raw.speciesinfo).bufferedReader()
+        reader.readLine()
+        reader.forEachLine {
+            val temp = it.split(";")
+            Log.i("INFO", temp[0])
+            val sb = StringBuilder(str1)
+            for (i in 0..2){
+                sb.append("'" + temp[i] + "', ")
+            }
+            sb.deleteCharAt(sb.length-1)
+            sb.deleteCharAt(sb.length-1)
+            sb.append(str2)
+            db.execSQL(sb.toString())
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
@@ -34,7 +63,6 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(PURCHASEDATE_COL, purchaseDate)
         values.put(WATERINGDATE_COL, wateringDate)
 
-        Log.i("INFO", name.toString()+species.toString()+purchaseDate+wateringDate)
 
         val db = this.writableDatabase
         val result = db.insert(TABLE_NAME, null, values).toInt()
@@ -87,7 +115,32 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun getName(): Cursor? {
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null)
+    }
 
+    fun getNextWateringDate(species:String): Int? {
+        val db = this.readableDatabase
+        val args = listOf<String>(species.toString()).toTypedArray()
+        val query = "SELECT * FROM " + TABLE_SPECIES + " WHERE _species = ? ;"
+        db.rawQuery(query, args).use {
+            if (it.moveToFirst()) {
+                val result = it.getIntOrNull(it.getColumnIndex("_deltaWater"))
+                return result
+            }
+        }
+        return null
+    }
+
+    fun getInfo(species:String): String? {
+        val db = this.readableDatabase
+        val args = listOf<String>(species.toString()).toTypedArray()
+        val query = "SELECT * FROM " + TABLE_SPECIES + " WHERE _species = ? ;"
+        db.rawQuery(query, args).use {
+            if (it.moveToFirst()) {
+                val result = it.getStringOrNull(it.getColumnIndex("_infoText"))
+                return result
+            }
+        }
+        return null
     }
 
     companion object {
@@ -95,6 +148,7 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         private val DATABASE_VERSION = 1
         val TABLE_NAME = "myLibrary"
         val TABLE_NAME_OLD = "myLibraryOld"
+        val TABLE_SPECIES = "mySpeciesLibrary"
 
         val ID_COL = "_id"
         val NAME_COl = "_name"
