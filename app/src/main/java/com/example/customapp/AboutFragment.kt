@@ -1,7 +1,6 @@
 package com.example.customapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,6 @@ class AboutFragment : Fragment() {
         val prefValue = preferences.getString("username", "")
         val username = view.findViewById<EditText>(R.id.usernameEdit)
         username.setText(prefValue.toString())
-        Log.i("INFO", prefValue.toString())
 
         //DELETE BUTTON
         val addBtn = view.findViewById<Button>(R.id.resetBtn)

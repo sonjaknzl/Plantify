@@ -2,7 +2,6 @@ package com.example.customapp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -65,7 +64,6 @@ class AddFragment : Fragment() {
                 nameLayout.error = "Give your plant a name!"
             } else if(chosenDropdown == -1) {
                 dropdownLayout.error = "Choose a species!"
-                Log.i("INFO", purchaseDateEdit.text.toString())
             }else if(purchaseDateEdit.text.toString() == ""){
                 purchaseDateLayout.error = "Select a valid date!"
             }else if(waterDateEdit.text.toString() == ""){
