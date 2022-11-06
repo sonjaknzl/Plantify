@@ -65,7 +65,6 @@ class AddFragment : Fragment() {
                 nameLayout.error = "Give your plant a name!"
             } else if(chosenDropdown == -1) {
                 dropdownLayout.error = "Choose a species!"
-                Toast.makeText(view.context, "Failed to add plant!", Toast.LENGTH_LONG).show()
                 Log.i("INFO", purchaseDateEdit.text.toString())
             }else if(purchaseDateEdit.text.toString() == ""){
                 purchaseDateLayout.error = "Select a valid date!"

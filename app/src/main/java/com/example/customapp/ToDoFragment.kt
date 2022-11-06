@@ -35,7 +35,6 @@ class ToDoFragment : Fragment() {
         val listToday = mutableListOf<Plant>()
         val listLater = mutableListOf<Plant>()
         for (item in list) {
-            Log.i("INFO", item.name)
             val date2: Date = sdf.parse(item.nextWaterDate) as Date
             if (date1 >= date2) {
                 listToday.add(item)

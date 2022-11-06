@@ -46,6 +46,7 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             sb.deleteCharAt(sb.length - 1)
             sb.append(str2)
             db.execSQL(sb.toString())
+            db.close()
         }
     }
 
@@ -102,8 +103,6 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(PURCHASEDATE_COL, purchaseDate)
         values.put(WATERINGDATE_COL, wateringDate)
 
-        Log.i("INFO", name)
-
         val whereclause = "$NAME_COl=?"
         val whereargs = arrayOf(name)
         return this.writableDatabase.update(TABLE_NAME, values, whereclause, whereargs)
@@ -144,8 +143,6 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.execSQL("COMMIT;")
         db.execSQL("PRAGMA foreign_keys=on;")
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_OLD)
-
-
         db.close()
     }
 
@@ -160,6 +157,7 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 WATERINGDATE_COL + " TEXT, "
                 + ID_COL + " INTEGER PRIMARY KEY" + ")")
         db.execSQL(query)
+        db.close()
     }
 
     fun getName(): Cursor? {
@@ -174,9 +172,11 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.rawQuery(query, args).use {
             if (it.moveToFirst()) {
                 val result = it.getIntOrNull(it.getColumnIndex("_deltaWater"))
+                db.close()
                 return result
             }
         }
+        db.close()
         return null
     }
 
@@ -187,9 +187,11 @@ class DatabaseHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.rawQuery(query, args).use {
             if (it.moveToFirst()) {
                 val result = it.getStringOrNull(it.getColumnIndex("_infoText"))
+                db.close()
                 return result
             }
         }
+        db.close()
         return null
     }
 

@@ -2,7 +2,6 @@ package com.example.customapp
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -24,7 +23,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         setContentView(R.layout.activity_main)
         val appSharedPrefs =
             androidx.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
-        appSharedPrefs.getString("username", "")?.let { Log.i("INFO", it) }
 
         // SET MENU HEADER
         val navView= findViewById<View>(R.id.nav_view) as NavigationView
@@ -49,7 +47,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
 
         //LISTENER DRAWER
         navView.setNavigationItemSelectedListener {
-
             it.isChecked = true
             when (it.itemId) {
                 R.id.firstDrawerItem -> replaceFragment(HomeFragment(), it.title.toString())

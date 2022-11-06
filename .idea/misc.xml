@@ -16,13 +16,13 @@
         <entry key="app/src/main/res/layout/add_activity.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.14945652173913043" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.19810638427734373" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1942962646484375" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.12228260869565218" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_to_do.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_row.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_row_to_do.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/layout_row_todo.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/layout_row_todo.xml" value="0.11678832116788321" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.1118659420289855" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.18072916666666666" />

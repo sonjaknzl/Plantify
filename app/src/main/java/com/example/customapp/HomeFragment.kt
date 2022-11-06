@@ -3,7 +3,6 @@ package com.example.customapp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,6 @@ class HomeFragment : Fragment() {
             it.visibility = false
         }
         recyclerView.adapter?.notifyDataSetChanged()
-        //Log.i("INFO", list.toString())
     }
 
 
@@ -65,8 +63,6 @@ class HomeFragment : Fragment() {
         val preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(view.context)
         val greeting = view.findViewById<TextView>(R.id.greeting)
         greeting.text = "Hello "+preferences.getString("username", "")+"!"
-        //greeting?.text = "Hello !"
-        Log.i("INFO", greeting?.text as String)
 
         //RECYCLERVIEW
         dataInArray()
@@ -132,7 +128,6 @@ class HomeFragment : Fragment() {
                     cursor.getString(cursor.getColumnIndex(DatabaseHelper.PURCHASEDATE_COL))
                 val plWateringDate: String =
                     cursor.getString(cursor.getColumnIndex(DatabaseHelper.WATERINGDATE_COL))
-                //Log.i("INFO", db.getNextWateringDate(plSpecies))
 
                 val array = getNextWaterDateAndInfo(db, plSpecies, plWateringDate)
                 list.add(Plant(plName, plSpecies, plPurchaseDate, plWateringDate,

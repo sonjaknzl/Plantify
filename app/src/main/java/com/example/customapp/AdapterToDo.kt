@@ -1,6 +1,5 @@
 package com.example.customapp
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +58,6 @@ class AdapterToDo(
                 val activity = it.context as MainActivity
                 (activity as MainActivity?)?.replaceFragment(HomeFragment(), "Home")
 
-                Log.i("INFO", item.waterDate)
                 Toast.makeText(v.context, "Plant was watered!", Toast.LENGTH_LONG).show()
 
                 //position: Int, name: String, species: Int, purchaseDate: String, wateringDate: String
