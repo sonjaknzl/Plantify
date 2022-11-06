@@ -3,6 +3,7 @@ package com.example.customapp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,8 +63,10 @@ class HomeFragment : Fragment() {
 
         // SET GREETING
         val preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(view.context)
-        val greeting = activity?.findViewById<TextView>(R.id.greeting)
-        greeting?.text = "Hello "+preferences.getString("username", "")+"!"
+        val greeting = view.findViewById<TextView>(R.id.greeting)
+        greeting.text = "Hello "+preferences.getString("username", "")+"!"
+        //greeting?.text = "Hello !"
+        Log.i("INFO", greeting?.text as String)
 
         //RECYCLERVIEW
         dataInArray()
