@@ -16,8 +16,8 @@
         <entry key="app/src/main/res/layout/add_activity.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.14945652173913043" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.19810638427734373" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.12228260869565218" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.24941711425781254" />
+        <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.20699482793393348" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_to_do.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_row.xml" value="0.1" />

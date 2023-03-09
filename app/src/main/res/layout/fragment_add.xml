@@ -28,35 +28,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:text="@string/defaultName"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/labelSpecies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="65dp"
+                    android:layout_marginTop="68dp"
                     android:text="@string/species"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/labelPurchaseDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="63dp"
                     android:text="@string/purchasedon"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/labelWaterDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="64dp"
                     android:text="@string/wateredon"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/nameLayout"
                     android:background="@color/white"
+                    android:textColorHint="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -79,10 +80,11 @@
                         android:id="@+id/nameEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:hint="@string/defaultName"
                         android:inputType="text"
-                        app:errorEnabled="true"
-                        android:background="@color/white" />
+                        android:textSize="14sp"
+                        app:errorEnabled="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +97,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nameLayout"
                     android:hint="@string/defaultSpecies"
+                    android:textColorHint="@color/grey"
                     android:layout_marginTop="30dp">
 
                     <AutoCompleteTextView
@@ -102,6 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14sp"
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +118,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dropdownLayout"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/grey">
 
                     <EditText
                         android:id="@+id/purchaseDateEdit"
@@ -123,6 +128,7 @@
                         app:errorEnabled="true"
                         android:background="@color/white"
                         android:hint="@string/defaultDate"
+                        android:textSize="14sp"
                         android:inputType="date"
                         android:focusableInTouchMode="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -135,7 +141,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/purchaseDateLayout"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/grey">
 
                     <EditText
                         android:id="@+id/waterDateEdit"
@@ -145,6 +152,7 @@
                         android:background="@color/white"
                         android:ems="10"
                         android:hint="@string/defaultDate"
+                        android:textSize="14sp"
                         android:inputType="date"
                         android:focusable="false"
                         android:focusableInTouchMode="false" />

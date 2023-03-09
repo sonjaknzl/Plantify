@@ -28,8 +28,8 @@
     <string name="resetdata">Reset data</string>
     <string name="deleteplants">DELETE PLANTS</string>
     <string name="species">Species</string>
-    <string name="purchasedon">Purchased \non</string>
-    <string name="wateredon">Last \nwatered on</string>
+    <string name="purchasedon">Purchased on</string>
+    <string name="wateredon">Last watered on</string>
     <string name="plantdesc">Plant Icon</string>
     <string name="addbtn">Add Button</string>
 </resources>
