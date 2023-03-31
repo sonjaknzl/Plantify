@@ -1,83 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CustomCardViewStyle1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:layout_centerInParent="true"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginBottom="30dp"
+    android:clipToPadding="false"
     android:orientation="vertical"
-    android:layout_marginBottom="10dp">
+    android:outlineAmbientShadowColor="@color/teal_200"
+    android:outlineSpotShadowColor="@color/black"
+    android:shadowColor="@color/white"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="20dp"
+    app:cardPreventCornerOverlap="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageView
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="20dp" />
+            style="@style/CustomCardViewStyle2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:alpha="0.8"
+            android:contentDescription="@string/plantdesc"
+            android:scaleType="centerCrop">
+
+        </com.google.android.material.imageview.ShapeableImageView>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:textSize="20sp"
-                android:textColor="@color/darkGrey"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/species"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/sfbold"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/species"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:textColor="@color/grey"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/nextWaterDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:text="Water next:"
-                android:textColor="@color/grey"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="@id/name"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/nextWaterDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/waternext"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/name" />
 
-            <TextView
-                android:id="@+id/nextWaterDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginBottom="2dp"
-                android:textColor="@color/darkGrey"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/nextWaterDateText"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/nextWaterDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nextWaterDateText" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <ImageButton
+                android:id="@+id/waterBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:src="@drawable/ic_droplet"
+                android:background="@drawable/rectangle_bg1"
+                android:contentDescription="Watered Button">
+
+            </ImageButton>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/waterBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WATERED"
-        android:textColor="@color/green_700"
-        app:backgroundTint="#D2E4D2"
-        android:textSize="14sp"
-        android:minHeight="0dp"/>
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

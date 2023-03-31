@@ -6,26 +6,38 @@
         <entry key="app/src/main/res/2/drawable/ic_alcosia_background.xml" value="0.1" />
         <entry key="app/src/main/res/2/mipmap-anydpi-v26/ic_alcosia.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1525" />
+        <entry key="app/src/main/res/drawable/custom_hamburger_icon.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/custom_menu.xml" value="0.1055" />
         <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1685" />
         <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.192" />
+        <entry key="app/src/main/res/drawable/ic_delete_white_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_droplet.xml" value="0.142" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.139" />
+        <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/rectangle_bg.xml" value="0.184" />
+        <entry key="app/src/main/res/drawable/rectangle_bg1.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/rectangle_bg2.xml" value="0.134" />
+        <entry key="app/src/main/res/drawable/rounded_corner_background.xml" value="0.2415" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/activity_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_todo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/add_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_toolbar.xml" value="0.17241007115719084" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.14945652173913043" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.19810638427734373" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.24941711425781254" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.20699482793393348" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.268182373046875" />
         <entry key="app/src/main/res/layout/fragment_to_do.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_row.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_row_to_do.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/layout_row_todo.xml" value="0.11678832116788321" />
+        <entry key="app/src/main/res/layout/layout_row_todo.xml" value="0.1746246337890625" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.1118659420289855" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.193" />
       </map>
     </option>
   </component>

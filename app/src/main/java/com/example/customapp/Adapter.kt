@@ -54,7 +54,7 @@ class Adapter(
             infoText.text = item.infoText
 
             //EDIT BUTTON
-            val editBtn = v.findViewById<ImageView>(R.id.editBtn)
+            val editBtn = v.findViewById<TextView>(R.id.editBtn)
             editBtn?.setOnClickListener {
                 val activity = it.context as MainActivity
                 (activity as MainActivity?)?.replaceFragment(

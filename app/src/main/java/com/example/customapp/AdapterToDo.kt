@@ -3,10 +3,7 @@ package com.example.customapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -32,7 +29,6 @@ class AdapterToDo(
 
     inner class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         private val name: TextView = v.findViewById(R.id.name)
-        private val species: TextView = v.findViewById(R.id.species)
         private val icon: ImageView = v.findViewById(R.id.icon)
         private val nextWaterDate: TextView = v.findViewById(R.id.nextWaterDate)
 
@@ -40,11 +36,10 @@ class AdapterToDo(
         fun bind(item: Plant) {
             name.text = item.name
             val dropdown = v.resources.getStringArray(R.array.options)
-            species.text = dropdown[item.species]
             nextWaterDate.text = item.nextWaterDate
 
             //WATER BUTTON
-            val waterBtn = v.findViewById<Button>(R.id.waterBtn)
+            val waterBtn = v.findViewById<ImageButton>(R.id.waterBtn)
             waterBtn?.setOnClickListener {
                 val current = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")

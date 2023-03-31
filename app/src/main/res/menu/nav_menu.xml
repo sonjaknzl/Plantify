@@ -3,12 +3,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/firstDrawerItem"
-            android:title="@string/home" />
+            android:title="@string/home"
+            />
         <item
             android:id="@+id/secondDrawerItem"
-            android:title="@string/toDo" />
+            android:title="@string/toDo"
+            />
         <item
             android:id="@+id/thirdDrawerItem"
-            android:title="@string/about" />
+            android:title="@string/about"
+
+            />
     </group>
 </menu>

@@ -32,4 +32,10 @@
     <string name="wateredon">Last watered on</string>
     <string name="plantdesc">Plant Icon</string>
     <string name="addbtn">Add Button</string>
+    <string name="edit">EDIT</string>
+    <string name="settings">Settings</string>
+    <string name="addPlant">Add a plant!</string>
+    <string name="editPlant">Edit a plant!</string>
+    <string name="lastwatered">Last watered:</string>
+    <string name="waternext">Water next:</string>
 </resources>

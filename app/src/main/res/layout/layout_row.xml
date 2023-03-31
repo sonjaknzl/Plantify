@@ -1,36 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="vertical">
+    app:cardElevation="20dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginBottom="20dp"
+    android:orientation="vertical"
+    android:shadowColor="@color/white"
+    app:cardBackgroundColor="@color/lightgrey"
+    style="@style/CustomCardViewStyle"
+    app:cardPreventCornerOverlap="false"
+    android:clipToPadding="false"
+    android:outlineAmbientShadowColor="@color/teal_200"
+    android:outlineSpotShadowColor="@color/black">
 
-    <LinearLayout
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        style="@style/CustomCardViewStyle"
+        android:id="@+id/icon"
+        android:alpha="0.8"
+        android:contentDescription="@string/plantdesc"
+        android:scaleType="centerCrop">
+
+    </com.google.android.material.imageview.ShapeableImageView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:paddingEnd="30dp"
+    android:orientation="vertical"
+    android:clipToPadding="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="@string/plantdesc" />
-
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:textSize="16sp"
+                android:fontFamily="@font/sfbold"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,21 +65,22 @@
                 android:layout_weight="1"
                 android:textSize="16sp" />
         </LinearLayout>
-    </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/expandedItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/expandedItem"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upperExpand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upperExpand"
             android:orientation="vertical">
 
             <LinearLayout
@@ -72,17 +98,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="Last watered:"
-                    android:textColor="@color/grey"
+                    android:text="@string/lastwatered"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/waterDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_marginBottom="2dp"
-                    android:textColor="@color/darkGrey"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -101,32 +127,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="Water next:"
-                    android:textColor="@color/grey"
+                    android:text="@string/waternext"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/nextWaterDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_marginBottom="2dp"
-                    android:textColor="@color/darkGrey"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </LinearLayout>
 
-            <ImageView
+            <TextView
                 android:id="@+id/editBtn"
-                android:layout_width="50dp"
+                android:fontFamily="@font/sfbold"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_width="wrap_content"
+                android:text="@string/edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/grey" />
+                android:textColor="@color/darkGrey"
+                android:textSize="18sp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -134,9 +159,11 @@
             android:id="@+id/infoText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/grey" />
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

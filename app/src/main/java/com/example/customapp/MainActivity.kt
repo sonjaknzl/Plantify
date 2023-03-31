@@ -4,9 +4,11 @@ package com.example.customapp
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
@@ -17,6 +19,7 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
     private lateinit var drawerLayout: DrawerLayout
     private var username: String = ""
     private var list = mutableListOf<Plant>()
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +41,24 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
 
         //this.deleteDatabase("PlantLibrary.db")
 
+        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         // SET DRAWERLAYOUT
         drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
+
+        toolbar.setPadding(60,120,0,0)
+        for (i in 0 until toolbar.childCount) {
+            if (toolbar.getChildAt(i) is ImageButton) {
+                toolbar.getChildAt(i).scaleX = 1.3f
+                toolbar.getChildAt(i).scaleY = 1.3f
+            }
+        }
 
         //LISTENER DRAWER
         navView.setNavigationItemSelectedListener {
@@ -73,7 +88,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
         drawerLayout.closeDrawers()
-        setTitle(title)
     }
 
     override fun onDataPass(plantList: MutableList<Plant>) {
