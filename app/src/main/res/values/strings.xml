@@ -38,4 +38,5 @@
     <string name="editPlant">Edit a plant!</string>
     <string name="lastwatered">Last watered:</string>
     <string name="waternext">Water next:</string>
+    <string name="wateredbutton">Watered Button</string>
 </resources>

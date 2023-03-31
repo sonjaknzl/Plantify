@@ -93,7 +93,7 @@
 
                 android:src="@drawable/ic_droplet"
                 android:background="@drawable/rectangle_bg1"
-                android:contentDescription="Watered Button">
+                android:contentDescription="@string/wateredbutton">
 
             </ImageButton>
 
